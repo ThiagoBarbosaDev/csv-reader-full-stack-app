@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/validate', (_req: Request, res: Response) => {
-  res.status(statusCodes.OK).json({ message: 'validate resposne'});
+  res.status(statusCodes.OK).json({ message: 'validate response'});
 });
 
 app.put('/update', (_req: Request, res: Response) => {

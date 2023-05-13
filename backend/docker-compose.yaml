@@ -10,7 +10,6 @@ services:
       - 33065:3306
   backend:
     container_name: backend
-    build: ./backend
     image: node:16
     restart: always
     ports:
@@ -22,8 +21,8 @@ services:
       - DB_PASSWORD=123456
       - SERVER_PORT=3001
     volumes:
-      - ./:/usr/app
-    working_dir: /usr/app
+      - ./:/usr/app/backend
+    working_dir: /usr/app/backend
     command: bash
     tty: true
     stdin_open: true
