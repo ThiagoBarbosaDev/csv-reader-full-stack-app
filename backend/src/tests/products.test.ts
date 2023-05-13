@@ -16,9 +16,6 @@ describe('The route /validate', () => {
   it('should return the expected values', async () => {
     response = await chai.request(app).post('/validate')
     expect(response.status).to.be.equal(200);
-  });
-
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(false);
+    expect(response.body.message).to.be.equal('validate route works');
   });
 });

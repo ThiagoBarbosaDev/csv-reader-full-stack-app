@@ -16,9 +16,6 @@ describe('The route /update', () => {
   it('should return the expected values', async () => {
     response = await chai.request(app).put('/update')
     expect(response.status).to.be.equal(200);
-  });
-
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(false);
+    expect(response.body.message).to.be.equal('update route works');
   });
 });

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && node ./build/server.js",
     "dev": "tsnd --respawn src/server.ts",
-    "test": "mocha -r ts-node/register src/tests/*.test.ts --exit -t 10000",
+    "test": "mocha -r ts-node/register src/tests/*.test.ts",
     "build": "tsc",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
