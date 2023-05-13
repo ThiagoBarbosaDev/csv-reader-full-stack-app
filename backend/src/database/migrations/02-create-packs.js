@@ -14,7 +14,6 @@ module.exports = {
         field: "pack_id",
         type: Sequelize.BIGINT,
         onUpdate: 'CASCADE',
-        primaryKey: true,
         foreignKey: true,
         references: {
           model: 'products',

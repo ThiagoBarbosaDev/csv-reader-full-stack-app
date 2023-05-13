@@ -1,3 +1,4 @@
+// fixed a bunch of unescaped HTML typos
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.bulkInsert(
