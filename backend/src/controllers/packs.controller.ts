@@ -8,7 +8,7 @@ export default class PacksController {
   }
 
   async update(req:Request, res:Response): Promise<void> {
-    const response = await this.packsService.update();
-    res.status(statusCodes.ok).json(response);
+    const data = await this.packsService.update();
+    res.status(statusCodes.ok).json({ data });
   }
 }

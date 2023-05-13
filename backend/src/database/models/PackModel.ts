@@ -38,6 +38,7 @@ Pack.init({
   sequelize: db,
   modelName: 'packs',
   underscored: true,
+  timestamps: false,
 });
 
 export default Pack;

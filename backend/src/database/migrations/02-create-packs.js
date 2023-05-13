@@ -34,7 +34,7 @@ module.exports = {
       },
       // QUANTIDADE DO PRODUTO COMPONENTE NO PACK
       qty: {
-        type: Sequelize.DECIMAL(9,2),
+        type: Sequelize.BIGINT,
         allowNull: false,
       },
     });

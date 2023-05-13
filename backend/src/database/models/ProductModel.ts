@@ -30,6 +30,7 @@ Product.init({
   sequelize: db,
   modelName: 'products',
   underscored: true,
+  timestamps: false,
 });
 
 Product.belongsToMany(Pack, { foreignKey: 'product_id', through: 'packProducts' });
