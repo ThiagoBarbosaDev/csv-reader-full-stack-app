@@ -1,6 +1,5 @@
-import { Model } from 'sequelize';
+import { Model, BIGINT } from 'sequelize';
 import db from '.';
-import { BIGINT } from 'sequelize';
 
 class Pack extends Model {
   declare id: number;

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import AppError from '../utils/AppError';
 
+// eslint-disable-next-line max-lines-per-function
 const errorMiddleware = (err: Error, _req: Request, res: Response, next: NextFunction):void => {
   const { name, message, statusCode, type } = err as AppError;
-  console.log(`name: ${name}`);
-
+  console.error(`name: ${name}`);
   switch (type) {
     case 'BadRequestError':
       res.status(statusCode).json({ message });
@@ -22,8 +22,7 @@ const errorMiddleware = (err: Error, _req: Request, res: Response, next: NextFun
       console.error(err);
       res.sendStatus(500);
   }
-
   next();
 };
 
-export default errorMiddleware
+export default errorMiddleware;

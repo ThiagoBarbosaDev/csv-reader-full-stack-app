@@ -1,5 +1,6 @@
 export default class PacksService {
-  update = async (authToken:string):Promise<Record<string, string>> => {
-    return { message: 'update route works' };
-  };
+  update = async ():Promise<Record<string, string>> =>
+    // todo: model update call
+    ({ message: 'update route works' })
+  ;
 }

@@ -3,11 +3,12 @@ import { ProductsService } from '../services';
 import statusCodes from '../utils/statusCodes';
 
 export default class ProductsController {
-  constructor(private ProductsService: ProductsService) {
-    this.ProductsService = ProductsService;
+  constructor(private productsService: ProductsService) {
+    this.productsService = productsService;
   }
 
-  async validate(req:Request, res:Response): Promise<void> {
-    res.status(statusCodes.OK).json({ message: 'validate route works' });
+  validate(req:Request, res:Response): void {
+    const response = this.productsService.validate();
+    res.status(statusCodes.ok).json(response);
   }
 }

@@ -1,6 +1,6 @@
 // https://reflectoring.io/express-error-handling/
 // custom error to carry statusCode using express async errors.
-export default class AppError extends Error{
+export default class AppError extends Error {
   statusCode: number;
   type: string;
 
