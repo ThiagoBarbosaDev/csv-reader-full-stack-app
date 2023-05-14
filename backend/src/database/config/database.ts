@@ -1,6 +1,6 @@
 import { Options } from 'sequelize';
 import 'dotenv/config';
-console.log(process.env.MYSQL_PORT)
+
 const config: Options = {
   username: process.env.DB_USER || 'root',
   password: process.env.DB_PASS || '123456',
