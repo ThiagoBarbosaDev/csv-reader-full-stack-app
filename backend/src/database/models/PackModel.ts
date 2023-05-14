@@ -1,11 +1,8 @@
-import { Model, BIGINT } from 'sequelize';
+import { Model, BIGINT, STRING } from 'sequelize';
 import db from '.';
 
 class Pack extends Model {
   declare id: number;
-  declare packId: number;
-  declare productId: number;
-  declare qty: number;
 }
 
 Pack.init({
@@ -14,25 +11,9 @@ Pack.init({
     autoIncrement: true,
     primaryKey: true,
   },
-  packId: {
-    type: BIGINT,
-    allowNull: false,
-    references: {
-      model: 'products',
-      key: 'code',
-    },
-  },
-  productId: {
-    type: BIGINT,
-    allowNull: false,
-    references: {
-      model: 'products',
-      key: 'code',
-    },
-  },
-  qty: {
-    type: BIGINT,
-    allowNull: false,
+  name: {
+    type: STRING(100),
+    primaryKey: true,
   },
 }, {
   sequelize: db,

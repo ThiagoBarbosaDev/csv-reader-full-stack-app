@@ -58,24 +58,6 @@ module.exports = {
           cost_price: 5.21,
           sales_price: 5.79,
         },
-        {
-          code: 1000,
-          name: 'BEBIDA ENERGÉTICA VIBE 2L - 6 UNIDADES',
-          cost_price: 48.54,
-          sales_price: 53.94,
-        },
-        {
-          code: 1010,
-          name: 'KIT ROLO DE ALUMINIO + FILME PVC WYDA',
-          cost_price: 8.80,
-          sales_price: 9.78,
-        },
-        {
-          code: 1020,
-          name: 'SUPER PACK RED BULL VARIADOS - 6 UNIDADES',
-          cost_price: 51.81,
-          sales_price: 57.00,
-        }
       ],
       {},
     );

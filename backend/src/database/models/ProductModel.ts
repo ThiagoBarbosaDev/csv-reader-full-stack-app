@@ -1,6 +1,5 @@
 import { Model, STRING, BIGINT, DECIMAL } from 'sequelize';
 import db from '.';
-import Pack from './PackModel';
 
 class Product extends Model {
   declare code: number;
@@ -32,7 +31,5 @@ Product.init({
   underscored: true,
   timestamps: false,
 });
-
-Product.belongsToMany(Pack, { foreignKey: 'product_id', through: 'packProducts' });
 
 export default Product;
