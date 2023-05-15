@@ -1,26 +1,18 @@
 /* eslint-disable no-console */
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { FaFileCsv } from 'react-icons/fa'
-import axios from 'axios'
 import styles from './DropZone.module.scss'
-
-const endpoint = 'http://localhost:3001/validate'
+import CsvContext from '../../context/CsvContext'
 
 function DropZone() {
+  const { setFile, setIsInvalid } = useContext(CsvContext)
+
   const onDrop = useCallback(async acceptedFiles => {
-    try {
-      const formData = new FormData()
-      formData.append('file', acceptedFiles[0])
-      const response = await axios.post(endpoint, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      console.log(response)
-    } catch (err) {
-      console.log(err)
-    }
+    setIsInvalid(true)
+    setFile(acceptedFiles[0])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // reason: react guarantees setters aren't going to change between renders
   }, [])
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -29,13 +21,13 @@ function DropZone() {
   })
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div {...getRootProps()} className={styles['drop-area']}>
         <input {...getInputProps()} name="file" />
-        <p>Arraste seu arquivo .CSV aqui</p>
+        <span>Arraste seu arquivo .CSV aqui</span>
         <FaFileCsv className={styles['csv-icon']} />
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -23,7 +23,7 @@ export default class ProductService {
     if (!data) {
       errors.push({
         context: csvLine,
-        message: 'Product code not found',
+        message: 'Código do produto não encontrado',
       });
     }
     return data;
@@ -50,7 +50,7 @@ export default class ProductService {
       abortEarly: false,
     });
     if (error) {
-      throw new AppError(400, 'Bad Request', error);
+      throw new AppError(400, 'Bad Request', error.details);
     }
   };
 
@@ -74,7 +74,8 @@ export default class ProductService {
       if (costNotValid) {
         errors.push({
           context: csvLine,
-          message: `New price (${newPrice}) is under the cost price (${targetProduct.costPrice})`,
+          // eslint-disable-next-line max-len
+          message: `PRICE: Novo preço(${newPrice}) abaixo do preço de custo (${targetProduct.costPrice})`,
         });
       }
       const marginNotValid =
@@ -86,7 +87,8 @@ export default class ProductService {
       if (marginNotValid) {
         errors.push({
           context: csvLine,
-          message: `New price (${newPrice}) margin is invalid, limit: 10%`,
+          message:
+            'PRICE: Novo preço inválido, limite máximo de mudança: 10%',
         });
       }
     });

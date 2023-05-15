@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.container {
+  width: min(90rem, 100% - 3rem);
+  margin-inline: auto;
+  font-family: $font-family-base;
+  font-weight: 900;
+
+  .file {
+    font-size: 2rem;
+  }
+
+  .forms {
+    display: flex;
+  
+    .button {
+      width: 100%;
+      padding: 1.5rem;
+      font-family: $font-family-base;
+    }
+
+    .button-update {
+      background-color: greenyellow;
+    }
+
+    .button-update:disabled {
+      background-color: rgb(190 198 178);
+    }
+  }
+
+}
