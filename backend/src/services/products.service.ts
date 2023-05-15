@@ -36,7 +36,8 @@ export default class ProductService {
         this.handleFindProduct(csvLine, index, errors)
       )
     );
-    if (errors) {
+    console.log(errors);
+    if (errors.length) {
       throw new AppError(404, 'Not Found', errors);
     }
   };
@@ -52,7 +53,7 @@ export default class ProductService {
 
   validate = async (csvData: ICsvFile[]): Promise<void> => {
     this.handleJoiValidation(csvData);
-    this.handleProductNotFound(csvData);
+    await this.handleProductNotFound(csvData);
   };
 
   parse = (csvData: string): ICsvFile[] => {
@@ -65,7 +66,6 @@ export default class ProductService {
   handler = async (csvData: string): Promise<ICsvFile[]> => {
     const response = this.parse(csvData);
     await this.validate(response);
-    console.log(response);
     return response;
   };
 }

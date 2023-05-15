@@ -9,10 +9,10 @@ const errorMiddleware = (
   res: Response,
   _next: NextFunction
 ): void => {
-  const { data, statusCode, message } = err as AppError;
+  const { context, statusCode, message } = err as AppError;
   console.error(`name: ${message}`);
 
-  res.status(statusCode).json({ data });
+  res.status(statusCode).json(context);
 };
 
 export default errorMiddleware;

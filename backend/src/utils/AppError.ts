@@ -7,16 +7,16 @@ import { INotFoundCodeError } from '../interfaces';
 export default class AppError extends Error {
   statusCode: number;
   type: string | undefined;
-  data: ValidationError | INotFoundCodeError[] | undefined;
+  context: ValidationError | INotFoundCodeError[] | undefined;
 
   constructor(
     statusCode: number,
     message?: string,
-    data?: ValidationError | INotFoundCodeError[]
+    context?: ValidationError | INotFoundCodeError[]
   ) {
     super(message);
     this.name = Error.name;
     this.statusCode = statusCode;
-    this.data = data;
+    this.context = context;
   }
 }
