@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './Importer.module.scss'
-import Button from '../../components/Button'
+import DropZone from '../../components/DropZone/DropZone'
 
 function Importer() {
   return (
     <div>
       <span className={styles['font-big']}>hello world</span>
-      <Button>Click</Button>
+      <DropZone />
     </div>
   )
 }

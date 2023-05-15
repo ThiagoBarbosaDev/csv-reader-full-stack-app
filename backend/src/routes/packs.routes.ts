@@ -7,6 +7,8 @@ const packsRouter = Router();
 const packsService = new PacksService();
 const packsController = new PacksController(packsService);
 
-packsRouter.route('/update').put((req, res) => packsController.update(req, res));
+packsRouter
+  .route('/update')
+  .put((req, res) => packsController.update(req, res));
 
 export default packsRouter;

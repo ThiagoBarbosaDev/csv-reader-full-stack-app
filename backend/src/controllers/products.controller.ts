@@ -7,8 +7,9 @@ export default class ProductsController {
     this.productsService = productsService;
   }
 
-  validate(req:Request, res:Response): void {
-    const response = this.productsService.validate();
-    res.status(statusCodes.ok).json(response);
+  validate(req: Request, res: Response): void {
+    const csvData = req.file?.buffer.toString() as string;
+    const response = this.productsService.handler(csvData);
+    res.status(statusCodes.ok).json({ message: response });
   }
 }
