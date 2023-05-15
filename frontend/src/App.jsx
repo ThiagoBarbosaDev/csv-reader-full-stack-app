@@ -1,11 +1,10 @@
 import React from 'react'
-import Button from './components/Button'
+import Importer from './pages/Importer/Importer'
 
 function App() {
   return (
     <div>
-      <span>Hello World</span>
-      <Button />
+      <Importer />
     </div>
   )
 }
