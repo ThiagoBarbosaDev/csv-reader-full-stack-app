@@ -7,9 +7,8 @@ import Product from '../database/models/ProductModel';
 export default class ProductService {
   handleFindProduct = async (
     csvLine: ICsvFile,
-    index: number,
     errors: INotFoundCodeError[]
-  ): Promise<INotFoundCodeError | undefined> => {
+  ): Promise<Product | null> => {
     const data = await Product.findByPk(
       Number(csvLine?.product_code),
       {
@@ -23,23 +22,23 @@ export default class ProductService {
         message: 'Product code not found',
       });
     }
-    return undefined;
+    return data;
   };
 
   handleProductNotFound = async (
     csvData: ICsvFile[]
-  ): Promise<void> => {
+  ): Promise<(Product | null)[]> => {
     const errors: INotFoundCodeError[] = [];
     // looks up database for product code and throws to the errorMiddleware unfound product codes
-    await Promise.all(
-      csvData.map((csvLine, index) =>
-        this.handleFindProduct(csvLine, index, errors)
+    const products = await Promise.all(
+      csvData.map((csvLine) =>
+        this.handleFindProduct(csvLine, errors)
       )
     );
-    console.log(errors);
     if (errors.length) {
       throw new AppError(404, 'Not Found', errors);
     }
+    return products;
   };
 
   handleJoiValidation = (csvData: ICsvFile[]) => {
@@ -51,9 +50,59 @@ export default class ProductService {
     }
   };
 
+  // eslint-disable-next-line max-lines-per-function
+  handleCostPrice = (
+    csvData: ICsvFile[],
+    products: (Product | null)[]
+  ): void => {
+    const errors: INotFoundCodeError[] = [];
+    // eslint-disable-next-line max-lines-per-function
+    csvData.forEach((csvLine) => {
+      const code = Number(csvLine.product_code);
+      const newPrice = parseFloat(csvLine.new_price);
+
+      const targetProduct = products.find(
+        (product) => product?.code === code
+      ) as Product;
+
+      const costNotValid = targetProduct.costPrice >= newPrice;
+
+      if (costNotValid) {
+        errors.push({
+          context: csvLine,
+          message: `New price (${newPrice}) is under the cost price (${targetProduct.costPrice})`,
+        });
+      }
+      const marginNotValid =
+        newPrice >
+          parseFloat((targetProduct.salesPrice * 1.1).toFixed(2)) ||
+        newPrice <
+          parseFloat((targetProduct.salesPrice * 0.9).toFixed(2));
+
+      if (marginNotValid) {
+        errors.push({
+          context: csvLine,
+          message: `New price (${newPrice}) margin is invalid, limit: 10%`,
+        });
+      }
+    });
+    if (errors.length) {
+      throw new AppError(400, 'Bad Request', errors);
+    }
+  };
+
+  // handle business related validations.
+  handlePrices = (
+    csvData: ICsvFile[],
+    products: (Product | null)[]
+  ) => {
+    this.handleCostPrice(csvData, products);
+  };
+
   validate = async (csvData: ICsvFile[]): Promise<void> => {
     this.handleJoiValidation(csvData);
-    await this.handleProductNotFound(csvData);
+    const products = await this.handleProductNotFound(csvData);
+    this.handlePrices(csvData, products);
   };
 
   parse = (csvData: string): ICsvFile[] => {
