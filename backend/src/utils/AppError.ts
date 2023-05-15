@@ -1,16 +1,28 @@
 // https://reflectoring.io/express-error-handling/
 // custom error to carry statusCode using express async errors.
+
+import { ValidationError } from 'joi';
+import {
+  INotFoundCodeError,
+  IValidationResponse,
+} from '../interfaces';
+
 export default class AppError extends Error {
   statusCode: number;
-  type: string;
+  type: string | undefined;
+  context: ValidationError | INotFoundCodeError[] | undefined;
+  response?: IValidationResponse;
 
-  constructor(statusCode: number, type: string, message: string | undefined) {
+  constructor(
+    statusCode: number,
+    message?: string,
+    context?: ValidationError | INotFoundCodeError[],
+    response?: IValidationResponse
+  ) {
     super(message);
-
-    Object.setPrototypeOf(this, new.target.prototype);
     this.name = Error.name;
     this.statusCode = statusCode;
-    this.type = type;
-    Error.captureStackTrace(this);
+    this.context = context;
+    this.response = response;
   }
 }

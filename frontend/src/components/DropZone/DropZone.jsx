@@ -9,21 +9,23 @@ const endpoint = 'http://localhost:3001/validate'
 
 function DropZone() {
   const onDrop = useCallback(async acceptedFiles => {
-    console.log(acceptedFiles)
-    const formData = new FormData()
-    formData.append('file', acceptedFiles[0])
-    const response = await axios.post(endpoint, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    console.log(response)
+    try {
+      const formData = new FormData()
+      formData.append('file', acceptedFiles[0])
+      const response = await axios.post(endpoint, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      console.log(response)
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
-    accept: 'text/csv',
   })
 
   return (

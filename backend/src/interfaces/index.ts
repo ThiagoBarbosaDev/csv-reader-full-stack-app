@@ -27,3 +27,13 @@ export interface ICsvFile {
   product_code: string;
   new_price: string;
 }
+
+export interface INotFoundCodeError {
+  context: ICsvFile;
+  message: string;
+}
+
+export interface IValidationResponse {
+  csvData: ICsvFile[];
+  productData: IProduct[];
+}
