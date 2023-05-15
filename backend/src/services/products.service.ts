@@ -1,5 +1,9 @@
 import Papa from 'papaparse';
-import { ICsvFile, INotFoundCodeError } from '../interfaces';
+import {
+  ICsvFile,
+  INotFoundCodeError,
+  IValidationResponse,
+} from '../interfaces';
 import CsvFileSchema from './schemas';
 import AppError from '../utils/AppError';
 import Product from '../database/models/ProductModel';
@@ -54,7 +58,7 @@ export default class ProductService {
   handleCostPrice = (
     csvData: ICsvFile[],
     products: Product[]
-  ): void => {
+  ): IValidationResponse => {
     const errors: INotFoundCodeError[] = [];
     // eslint-disable-next-line max-lines-per-function
     csvData.forEach((csvLine) => {
@@ -87,11 +91,12 @@ export default class ProductService {
       }
     });
 
-    const errorResponse = { csvData, productData: products };
+    const responseData = { csvData, productData: products };
 
     if (errors.length) {
-      throw new AppError(400, 'Bad Request', errors, errorResponse);
+      throw new AppError(400, 'Bad Request', errors, responseData);
     }
+    return responseData;
   };
 
   // handle business related validations.
@@ -99,12 +104,15 @@ export default class ProductService {
     this.handleCostPrice(csvData, products);
   };
 
-  validate = async (csvData: ICsvFile[]): Promise<void> => {
+  validate = async (
+    csvData: ICsvFile[]
+  ): Promise<IValidationResponse> => {
     this.handleJoiValidation(csvData);
     const products = (await this.handleProductNotFound(
       csvData
     )) as Product[];
-    this.handlePrices(csvData, products);
+    const response = this.handleCostPrice(csvData, products);
+    return response;
   };
 
   parse = (csvData: string): ICsvFile[] => {
@@ -114,9 +122,9 @@ export default class ProductService {
     return data;
   };
 
-  handler = async (csvData: string): Promise<ICsvFile[]> => {
-    const response = this.parse(csvData);
-    await this.validate(response);
+  handler = async (csvData: string): Promise<IValidationResponse> => {
+    const parsedData = this.parse(csvData);
+    const response = await this.validate(parsedData);
     return response;
   };
 }

@@ -11,6 +11,6 @@ export default class ProductsController {
     const csvData = req.file?.buffer.toString() as string;
     const response = await this.productsService.handler(csvData);
     console.log(response, 'controller');
-    res.status(statusCodes.ok).json({ message: response });
+    res.status(statusCodes.ok).json({ productData: response });
   }
 }
