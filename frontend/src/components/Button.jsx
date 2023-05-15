@@ -1,7 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Button({ children, className, isSubmit, onClick, name, value }) {
+function Button({
+  children,
+  className,
+  isSubmit = true,
+  onClick,
+  name,
+  value,
+  isDisabled = false,
+  action,
+}) {
   return (
     <button
       className={className}
@@ -9,6 +18,8 @@ function Button({ children, className, isSubmit, onClick, name, value }) {
       onClick={onClick}
       name={name}
       value={value}
+      disabled={isDisabled}
+      action={action}
     >
       {children}
     </button>
@@ -16,17 +27,23 @@ function Button({ children, className, isSubmit, onClick, name, value }) {
 }
 
 Button.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  isSubmit: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  isSubmit: PropTypes.bool,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  isDisabled: PropTypes.bool,
+  action: PropTypes.string,
 }
 
 Button.defaultProps = {
+  isSubmit: true,
   children: null,
+  isDisabled: null,
   className: null,
+  action: null,
+  onClick: null,
 }
 
 export default Button

@@ -1,11 +1,12 @@
 import React from 'react'
 import Importer from './pages/Importer/Importer'
+import CsvProvider from './context/CsvProvider'
 
 function App() {
   return (
-    <div>
+    <CsvProvider>
       <Importer />
-    </div>
+    </CsvProvider>
   )
 }
 
