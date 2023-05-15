@@ -7,22 +7,19 @@ function CsvProvider({ children }) {
   const [data, setData] = useState(null)
   const [errors, setErrors] = useState(null)
   const [isInvalid, setIsInvalid] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
 
   const context = useMemo(
     () => ({
       data,
       file,
       errors,
-      isLoading,
       isInvalid,
       setData,
       setFile,
       setErrors,
-      setIsLoading,
       setIsInvalid,
     }),
-    [file, errors, data, isLoading, isInvalid]
+    [file, errors, data, isInvalid]
   )
 
   return <CsvContext.Provider value={context}>{children}</CsvContext.Provider>

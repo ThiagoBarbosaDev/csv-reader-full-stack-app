@@ -13,8 +13,6 @@ function TableRow({ data }) {
   const newPrice = csvData?.find(csvLine => Number(csvLine.product_code) === data.code).new_price
   const csvErrors = errors?.find(err => Number(err.context.product_code) === data.code)
 
-  console.log(csvErrors, 'componente: ', data)
-  console.log()
   return (
     <tr className={styles['data-row']}>
       <td className={styles['data-cell']} data-cell="Codigo">

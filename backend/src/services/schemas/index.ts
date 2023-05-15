@@ -35,7 +35,7 @@ const CsvFileSchema = Joi.array().items(
       'any.required':
         'Campo "product_code" do índice ## é obrigatório',
     }),
-  })
+  }),
 );
 
 export default CsvFileSchema;

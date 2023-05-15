@@ -9,9 +9,7 @@ export default class ProductsController {
 
   async validate(req: Request, res: Response): Promise<void> {
     const csvData = req.file?.buffer.toString() as string;
-    console.log(csvData);
     const response = await this.productsService.handler(csvData);
-    console.log(response, 'controller');
     res.status(statusCodes.ok).json({ productData: response });
   }
 }
