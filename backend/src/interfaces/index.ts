@@ -27,3 +27,8 @@ export interface ICsvFile {
   product_code: string;
   new_price: string;
 }
+
+export interface INotFoundCodeError {
+  context: ICsvFile;
+  message: string;
+}
