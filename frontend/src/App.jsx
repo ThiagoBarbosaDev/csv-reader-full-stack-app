@@ -1,8 +1,12 @@
 import React from 'react'
-import styles from './pages/Admin/Admin.module.scss'
+import Importer from './pages/Importer/Importer'
 
 function App() {
-  return <div className={styles.app}>Hello World</div>
+  return (
+    <div>
+      <Importer />
+    </div>
+  )
 }
 
 export default App

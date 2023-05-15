@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable camelcase */
 export interface IPack {
-  id: number,
-  name: string,
+  id: number;
+  name: string;
 }
 
 export interface IProductPack {
-  packId: number,
-  productId: number,
-  qty: number,
+  packId: number;
+  productId: number;
+  qty: number;
 }
 
 export interface IProduct {
@@ -19,4 +21,9 @@ export interface IProduct {
 export interface ICompletePack extends IProductPack {
   packData: IPack;
   productData: IProduct;
+}
+
+export interface ICsvFile {
+  product_code: string;
+  new_price: string;
 }

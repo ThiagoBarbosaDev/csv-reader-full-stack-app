@@ -1,5 +1,5 @@
 {
-  "ignoreFiles": ["**/*.tsx", "**/*.ts", "**/*.js", "**/*.jsx"],
+  "ignoreFiles": ["**/*.jsx", "**/*.js"],
   "extends": "stylelint-config-recess-order",
   "customSyntax": "postcss-scss",
   "rules": {

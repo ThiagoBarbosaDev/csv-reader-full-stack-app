@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.container {
+  width: min(90rem, 100% - 3rem);
+  margin: 5rem auto;
+  margin-inline: auto;
+  font-family: $font-family-base;
+  font-size: clamp(2rem, 10vw, 7rem);
+  font-weight: 900;
+  background-color: red;
+}
+
+.drop-area {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  width: min(50rem, 80%);
+  height: 20rem;
+  padding: 2rem;
+  margin-inline: auto;
+  background-color: greenyellow;
+  border-radius: 5px;
+}
+
+.csv-icon {
+  font-size: clamp(5rem, 10vw, 7rem);
+}
