@@ -1,8 +1,13 @@
 import React from 'react'
-import styles from './pages/Admin/Admin.module.scss'
+import Button from './components/Button'
 
 function App() {
-  return <div className={styles.app}>Hello World</div>
+  return (
+    <div>
+      <span>Hello World</span>
+      <Button />
+    </div>
+  )
 }
 
 export default App
