@@ -10,7 +10,6 @@ function DataTable() {
     return null
   }
   const { productData } = data
-  console.log(data)
 
   return (
     <div className={styles.container}>

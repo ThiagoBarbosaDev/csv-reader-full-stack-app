@@ -8,7 +8,8 @@ export default class PacksController {
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    const data = await this.packsService.update();
-    res.status(statusCodes.ok).json({ data });
+    const csvData = req.file?.buffer.toString() as string;
+    await this.packsService.update(csvData);
+    res.status(statusCodes.noContent).end();
   }
 }

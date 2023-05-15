@@ -7,7 +7,7 @@ const errorMiddleware = (
   err: Error,
   _req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ): void => {
   const { context, statusCode, message, response } = err as AppError;
   console.error(`name: ${message}`);

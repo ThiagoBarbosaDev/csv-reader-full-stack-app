@@ -13,7 +13,7 @@ app.use('/', productsRouter);
 app.use('/', packsRouter);
 app.use(
   (err: Error, _req: Request, res: Response, next: NextFunction) =>
-    errorMiddleware(err, _req, res, next)
+    errorMiddleware(err, _req, res, next),
 );
 
 export default app;

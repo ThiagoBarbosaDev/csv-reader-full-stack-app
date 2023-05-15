@@ -17,7 +17,7 @@ export default class AppError extends Error {
     statusCode: number,
     message?: string,
     context?: ValidationErrorItem[] | INotFoundCodeError[],
-    response?: IValidationResponse
+    response?: IValidationResponse,
   ) {
     super(message);
     this.name = Error.name;

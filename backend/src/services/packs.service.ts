@@ -1,17 +1,26 @@
-import Pack from '../database/models/PackModel';
-import PackProduct from '../database/models/PackProductModel';
+import Papa from 'papaparse';
 import Product from '../database/models/ProductModel';
+import { ICsvFile } from '../interfaces';
 
 class PacksService {
-  update = async (): Promise<PackProduct[]> => {
-    const response = await PackProduct.findAll({
-      where: { packId: 1010 },
-      include: [
-        { model: Pack, as: 'packData' },
-        { model: Product, as: 'productData' },
-      ],
+  parse = (csvData: string): ICsvFile[] => {
+    const { data } = Papa.parse<ICsvFile>(csvData, {
+      header: true,
     });
-    return response;
+    return data;
+  };
+
+  update = async (csvData: string): Promise<void> => {
+    const parsedData = this.parse(csvData);
+    await Promise.all(
+      parsedData.map(
+        async (csvFile: ICsvFile): Promise<[number, Product[]]> =>
+          Product.update(
+            { salesPrice: parseFloat(csvFile.new_price) },
+            { where: { code: Number(csvFile.product_code) } },
+          ),
+      ),
+    );
   };
 }
 

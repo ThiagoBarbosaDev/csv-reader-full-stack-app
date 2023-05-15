@@ -14,7 +14,6 @@ const upload = multer({ storage });
 productsRouter
   .route('/validate')
   .post(upload.single('file'), (req, res) =>
-    productsController.validate(req, res)
-  );
+    productsController.validate(req, res));
 
 export default productsRouter;
