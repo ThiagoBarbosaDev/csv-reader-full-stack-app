@@ -53,7 +53,7 @@ export default class ProductService {
   // eslint-disable-next-line max-lines-per-function
   handleCostPrice = (
     csvData: ICsvFile[],
-    products: (Product | null)[]
+    products: Product[]
   ): void => {
     const errors: INotFoundCodeError[] = [];
     // eslint-disable-next-line max-lines-per-function
@@ -86,22 +86,24 @@ export default class ProductService {
         });
       }
     });
+
+    const errorResponse = { csvData, productData: products };
+
     if (errors.length) {
-      throw new AppError(400, 'Bad Request', errors);
+      throw new AppError(400, 'Bad Request', errors, errorResponse);
     }
   };
 
   // handle business related validations.
-  handlePrices = (
-    csvData: ICsvFile[],
-    products: (Product | null)[]
-  ) => {
+  handlePrices = (csvData: ICsvFile[], products: Product[]) => {
     this.handleCostPrice(csvData, products);
   };
 
   validate = async (csvData: ICsvFile[]): Promise<void> => {
     this.handleJoiValidation(csvData);
-    const products = await this.handleProductNotFound(csvData);
+    const products = (await this.handleProductNotFound(
+      csvData
+    )) as Product[];
     this.handlePrices(csvData, products);
   };
 

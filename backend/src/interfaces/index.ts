@@ -32,3 +32,8 @@ export interface INotFoundCodeError {
   context: ICsvFile;
   message: string;
 }
+
+export interface IValidationResponse {
+  csvData: ICsvFile[];
+  productData: IProduct[];
+}
