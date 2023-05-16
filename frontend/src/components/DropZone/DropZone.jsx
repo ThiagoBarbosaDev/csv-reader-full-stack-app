@@ -24,7 +24,7 @@ function DropZone() {
     <section className={styles.container}>
       <div {...getRootProps()} className={styles['drop-area']}>
         <input {...getInputProps()} name="file" />
-        <span>Arraste seu arquivo .CSV aqui</span>
+        <span>Clique aqui para fazer o upload do seu .CSV</span>
         <FaFileCsv className={styles['csv-icon']} />
       </div>
     </section>

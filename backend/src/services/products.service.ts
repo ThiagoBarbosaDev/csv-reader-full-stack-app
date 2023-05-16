@@ -39,9 +39,11 @@ export default class ProductService {
       csvData.map((csvLine) =>
         this.handleFindProduct(csvLine, errors)),
     );
+
     if (errors.length) {
       throw new AppError(404, 'Not Found', errors);
     }
+
     return products;
   };
 
@@ -49,6 +51,7 @@ export default class ProductService {
     const { error } = CsvFileSchema.validate(csvData, {
       abortEarly: false,
     });
+
     if (error) {
       throw new AppError(400, 'Bad Request', error.details);
     }
@@ -79,6 +82,7 @@ export default class ProductService {
            (${targetProduct.costPrice})`,
         });
       }
+
       const marginNotValid = newPrice
           > parseFloat((targetProduct.salesPrice * 1.1).toFixed(2))
         || newPrice
@@ -105,6 +109,7 @@ export default class ProductService {
     csvData: ICsvFile[],
   ): Promise<IValidationResponse> => {
     this.handleJoiValidation(csvData);
+
     const products = (await this.handleProductNotFound(
       csvData,
     )) as Product[];
