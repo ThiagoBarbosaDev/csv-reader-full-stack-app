@@ -17,7 +17,7 @@
     "cy:open": "cypress open",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "start": "vite --port 3000",
+    "start": "vite --host",
     "build": "vite build",
     "serve": "vite preview",
     "lint:styles": "npx stylelint '**/*.scss'",
