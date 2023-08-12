@@ -1,6 +1,6 @@
 # csv-reader-full-stack-app
 
-## [Video de apresentação do Projeto (Clique Aqui)](youtube.com/watch?v=jbtfDtu18nc)
+## [Video de apresentação do Projeto (Clique Aqui)](https://youtube.com/watch?v=jbtfDtu18nc)
 ## Aplicação
 Aplicação SPA, em React, Node com express, fullstack que utiliza um banco de dados MySQL para armazenar dados de produtos, esses dados são utilizados para gerar pacotes promocionais.
 
